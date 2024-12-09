@@ -16,7 +16,7 @@ pipeline {
         stage('Run Docker Container') {
             steps {
                 script {
-                    sh "sudo docker run -d -p 3000:80 fortune-wheel"
+                    sh "sudo docker run -d -p 3000:3000 fortune-wheel"
                 }
             }
         }
