@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git 'https://github.com/Shadhanah-Rajan/fortune-wheel.git' // Replace with your repo
+                git branch: 'main', url: 'https://github.com/Shadhanah-Rajan/fortune-wheel.git' // Replace with your repo
             }
         }
         stage('Build Docker Image') {
