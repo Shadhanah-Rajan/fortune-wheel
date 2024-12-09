@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fortune Wheel</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #f4f4f4;
+      padding: 20px;
+    }
+    #wheel {
+      width: 300px;
+      height: 300px;
+      margin: 0 auto;
+      border-radius: 50%;
+      border: 5px solid #333;
+      position: relative;
+      overflow: hidden;
+    }
+    #spin-button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    #message {
+      margin-top: 20px;
+      font-size: 18px;
+      color: #333;
+    }
+    .segment {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      clip-path: polygon(50% 50%, 100% 0, 100% 100%);
+    }
+  </style>
+</head>
+<body>
+  <h1>Fortune Wheel</h1>
+  <div id="wheel"></div>
+  <button id="spin-button">Spin the Wheel</button>
+  <div id="message">Spin the wheel to get your fortune!</div>
+  
+  <script>
+    const wheel = document.getElementById("wheel");
+    const messageBox = document.getElementById("message");
+    const fortunes = [
+      "You will have a great day!",
+      "A surprise is waiting for you.",
+      "Happiness is coming your way.",
+      "Expect the unexpected.",
+      "Good fortune is ahead.",
+      "Take a chance, it will pay off.",
+      "You will achieve your goals.",
+      "Be patient; good things take time."
+    ];
+
+    function createWheel() {
+      const colors = ["#FF5733", "#FFC300", "#DAF7A6", "#900C3F", "#581845", "#C70039", "#28B463", "#5DADE2"];
+      for (let i = 0; i < fortunes.length; i++) {
+        const segment = document.createElement("div");
+        segment.classList.add("segment");
+        segment.style.background = colors[i % colors.length];
+        segment.style.transform = `rotate(${(i * 360) / fortunes.length}deg)`;
+        wheel.appendChild(segment);
+      }
+    }
+
+    function spinWheel() {
+      const spinAngle = Math.random() * 360 + 360 * 3; // 3 full rotations + random
+      const selectedFortuneIndex = Math.floor((spinAngle % 360) / (360 / fortunes.length));
+      const selectedFortune = fortunes[selectedFortuneIndex];
+
+      wheel.style.transition = "transform 3s ease-out";
+      wheel.style.transform = `rotate(${spinAngle}deg)`;
+
+      setTimeout(() => {
+        messageBox.textContent = selectedFortune;
+        wheel.style.transition = ""; // Reset for next spin
+        wheel.style.transform = `rotate(${(selectedFortuneIndex * 360) / fortunes.length}deg)`;
+      }, 3000);
+    }
+
+    document.getElementById("spin-button").addEventListener("click", spinWheel);
+
+    createWheel();
+  </script>
+</body>
+  </html>
+  
