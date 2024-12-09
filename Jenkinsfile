@@ -17,7 +17,11 @@ pipeline {
             steps {
                 script {
                     def container = docker.image('fortune-wheel').run('-p 8080:80')
-                    echo container.logs()
+                    sleep 10
+                    def status = sh(script: "docker ps | grep fortune-wheel", returnStatus: true)
+                    if (staus != 0){
+                        error "Container failed to start."
+                    }
                 }
             }
         }
