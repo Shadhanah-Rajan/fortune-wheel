@@ -16,7 +16,7 @@ pipeline {
         stage('Run Docker Container') {
             steps {
                 script {
-                    def container = docker.image('fortune-wheel').run('-p 8080:80')
+                    def container = docker.image('fortune-wheel').run('-p 3000:80')
                     sleep 10
                     def status = sh(script: "docker ps | grep fortune-wheel", returnStatus: true)
                     if (staus != 0){
