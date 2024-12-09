@@ -9,14 +9,14 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    docker.build('fortune-wheel-app')
+                    docker.build('fortune-wheel')
                 }
             }
         }
         stage('Run Docker Container') {
             steps {
                 script {
-                    docker.image('fortune-wheel-app').run('-p 8080:80')
+                    docker.image('fortune-wheel').run('-p 8080:80')
                 }
             }
         }
