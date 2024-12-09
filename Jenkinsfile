@@ -16,7 +16,8 @@ pipeline {
         stage('Run Docker Container') {
             steps {
                 script {
-                    docker.image('fortune-wheel').run('-p 8080:80')
+                    def container = docker.image('fortune-wheel').run('-p 8080:80')
+                    echo container.logs()
                 }
             }
         }
