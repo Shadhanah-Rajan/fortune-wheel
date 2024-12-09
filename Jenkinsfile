@@ -9,7 +9,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    docker.build('fortune-wheel')
+                    sh 'sudo docker build -t fortune-wheel .'
                 }
             }
         }
